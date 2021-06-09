@@ -1,0 +1,10 @@
+/things/*
+*~
+\#*\#
+
+.repl-*
+.nrepl-*
+
+.lein-*
+
+/target
