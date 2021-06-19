@@ -1,15 +1,16 @@
 (ns gloom-dashboard.util
   (:refer-clojure :exclude [use import])
-  (:require [scad-clj.scad :refer]
-            [scad-clj.model :refer :all]))
+  (:require [scad-clj.scad :refer :all]
+            [scad-clj.model :refer :all]
+            [clojure.pprint :as pprint]))
 
-(defn h "Half the value" [v] (/ v 2))
-(defn nh "Negative half value" [v] (- (h v)))
+(defn h "Half the value" [v] (try (/ v 2) (catch Exception e (pprint/pprint e) (throw e))))
+(defn nh "Negative half value" [v] (try (- (h v)) (catch Exception e (pprint/pprint e) (throw e))))
 
 (defn -cy
   "Create a cylinder with a higher resolution"
   [r h]
-  (->> (scad-clj.scad/cylinder (* r 5) h)
+  (->> (scad-clj.model/cylinder (* r 5) h)
        (scale [(/ 1 5) (/ 1 5) 1])))
 
 (defn -cu
