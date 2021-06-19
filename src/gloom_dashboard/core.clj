@@ -1,9 +1,8 @@
 (ns gloom-dashboard.core
   (:refer-clojure :exclude [use import])
-  (:require [scad-clj.scad :refer :all]
-            [scad-clj.model :refer :all]
-            [gloom-dashboard.util :refer :all]))
-            ;; [unicode-math.core :refer :all]))
+  (:require [scad-clj.scad :refer [write-scad]]
+            [scad-clj.model :refer [cube union pi difference minkowski translate mirror intersection hull rotate scale]]
+            [gloom-dashboard.util :refer [-cy -cu h nh -trap -ltrap -ttlcu]]))
 
 ;; (def hpxp-h 13.7)
 ;; (def hpxp-w 7.1)
@@ -197,10 +196,10 @@
   (spit "things/test.scad"
         (let
          [{:keys [base]} specs
-          bottom (difference (union base-case base-walls) base-holes)
-          cy (difference  (->> (-cy 12 7.7)
-                               (rotate (/ pi 2) [0 1 0])
-                               (translate [0 0 -11])) (-cu [50 50 50] [0 0 -25]))]
+          bottom (difference (union base-case base-walls) base-holes)]
+          ;; cy (difference  (->> (-cy 12 7.7)
+          ;;                      (rotate (/ pi 2) [0 1 0])
+          ;;                      (translate [0 0 -11])) (-cu [50 50 50] [0 0 -25]))]
           (write-scad (scale [10 10 10] ;;(difference bottom (->> (cube 50 50 50)
                                                ;;(translate [0 0 -23.5])))
 

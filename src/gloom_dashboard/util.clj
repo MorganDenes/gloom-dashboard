@@ -1,11 +1,10 @@
 (ns gloom-dashboard.util
   (:refer-clojure :exclude [use import])
-  (:require [scad-clj.scad :refer :all]
-            [scad-clj.model :refer :all]
-            [clojure.pprint :as pprint]))
+  (:require [scad-clj.model :refer [translate cube intersection scale hull]]
+            [clojure.pprint :refer [pprint]]))
 
-(defn h "Half the value" [v] (try (/ v 2) (catch Exception e (pprint/pprint e) (throw e))))
-(defn nh "Negative half value" [v] (try (- (h v)) (catch Exception e (pprint/pprint e) (throw e))))
+(defn h "Half the value" [v] (try (/ v 2) (catch Exception e (pprint e) (throw e))))
+(defn nh "Negative half value" [v] (try (- (h v)) (catch Exception e (pprint e) (throw e))))
 
 (defn -cy
   "Create a cylinder with a higher resolution"
